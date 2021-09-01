@@ -26,3 +26,4 @@ jobs:
         git config --global user.email "git.action@users.noreply.github.com"
         ~/.local/bin/bumpversion --list $version_part
         git push
+        git push --tags
