@@ -22,7 +22,7 @@ jobs:
     - name: bump2version
       run: |
         pip install --no-cache-dir bump2version
+        ~/.local/bin/bumpversion --list $version_part
         git config --global user.name "Git Action"
-        git config --global user.email "git.action@dummy.org"
-        ~/.local/bin/bumpversion $version_part
+        git config --global user.email "git.action@@users.noreply.github.com"
         git push
