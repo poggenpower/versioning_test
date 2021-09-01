@@ -12,7 +12,7 @@ jobs:
     runs-on: ubuntu-20.04
     env:
       version_part_helper: "${{contains(github.event.head_commit.message, 'FEAT') && 'minor' || 'patch'}}"
-      version_part: "${{contains(github.event.head_commit.message, 'BREAKING CHANGE') && 'major' || env.version_part_helper }}"
+      version_part: "${{contains(github.event.head_commit.message, 'BREAKING CHANGE') && 'major' || jobs.bump-version.env.version_part_helper }}"
     steps:
     - name: debug/help
       run: echo $version_part
