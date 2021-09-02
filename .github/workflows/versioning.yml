@@ -20,10 +20,10 @@ jobs:
     - name: bump2version
       run: |
         case $commit_subject in
-          "*fix*"   ) version_part=patch
-          "*feat:*" ) version_part=minor
-          "*BREAKING CHANGE*" ) version_part=major
-          "*" ) exit 0
+          "*fix*"   ) version_part=patch;;
+          "*feat:*" ) version_part=minor;;
+          "*BREAKING CHANGE*" ) version_part=major;;
+          "*" ) exit 0;;
         echo $version_part
         pip install --no-cache-dir bump2version
         git config --global user.name "Git Action"
