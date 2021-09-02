@@ -22,9 +22,9 @@ jobs:
         set -x
         version_part="None"
         case $commit_subject in
-          *fix*   ) version_part=patch;;
+          *fix:*   ) version_part=patch;;
           *feat:* ) version_part=minor;;
-          *BREAKING CHANGE* ) version_part=major;;
+          *BREAKING_CHANGE:* ) version_part=major;;
           * ) exit 0;;
         esac
         echo Version Part: $version_part
