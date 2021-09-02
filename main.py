@@ -15,7 +15,7 @@ import prometheus_client as prometheus
 from yamlreader import yaml_load
 import utils.prometheus_additions
 
-__version__ = '__version__ = '1.4.0''
+__version__ = '__version__ = '1.5.0''
 SUFFIXES_PER_TYPE = {
     "gauge": [], 
     "counter": ['total'],
