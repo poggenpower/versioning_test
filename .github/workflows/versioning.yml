@@ -11,17 +11,20 @@ jobs:
     if: "!contains(github.event.head_commit.message, 'Bump version')"
     runs-on: ubuntu-20.04
     env:
-      version_part_helper: "${{contains(github.event.head_commit.message, 'FEAT') && 'minor' || 'patch'}}"
-      version_part: "${{contains(github.event.head_commit.message, 'BREAKING CHANGE') && 'major' || jobs.bump-version.env.version_part_helper }}"
+      commit_subject: "${{ github.event.head_commit.message }}"
     steps:
-    - name: debug/help
-      run: echo $version_part
     - name: actions/checkout
       uses: actions/checkout@v2
       with:
           persist-credentials: true
     - name: bump2version
       run: |
+        case $commit_subject in
+          "*fix*"   ) version_part=patch
+          "*feat:*" ) version_part=minor
+          "*BREAKING CHANGE*" ) version_part=major
+          "*" ) exit 0
+        echo $version_part
         pip install --no-cache-dir bump2version
         git config --global user.name "Git Action"
         git config --global user.email "git.action@users.noreply.github.com"
